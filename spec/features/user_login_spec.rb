@@ -21,6 +21,6 @@ RSpec.feature "User login", type: :feature do
     click_button 'Log in'
 
     expect(page).to have_content('Invalid username or password.')
-    expect(page).to have_current_path(login_path)  # Stay on the login page
+    expect(page).to have_current_path(login_path)
   end
 end
