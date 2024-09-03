@@ -7,4 +7,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :bio, presence: true
+
+  def collection_by_type(collection_type)
+    return unless collections.where(collection_type: collection_type).any?
+
+    collection = collections.where(collection_type: collection_type)
+    collection.first.video_games
+  end
 end
