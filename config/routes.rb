@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'video_games#index'
 
   resources :users, only: [:new, :create, :show]
+  resources :video_games
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

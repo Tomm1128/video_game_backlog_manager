@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @video_game.name %></h1>
+      <h3 class="card-subtitle mb-3 text-muted"><%= @video_game.description %></h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Release Date:</strong> <%= @video_game.release_date %></li>
+        <li class="list-group-item"><strong>Developer:</strong> <%= @video_game.developer %></li>
+        <li class="list-group-item"><strong>Publisher:</strong> <%= @video_game.publisher %></li>
+        <li class="list-group-item"><strong>Platform:</strong> <%= @video_game.platform %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h2>Reviews</h2>
+    <% if @video_game.reviews.any? %>
+      <div class="list-group">
+        <% @video_game.reviews.each do |review| %>
+          <div class="list-group-item">
+            <h4 class="mb-1"><%= review.title %></h4>
+            <p class="mb-1"><%= review.body %></p>
+            <small class="text-muted">Rating: <%= review.rating %> | Reviewed by <%= link_to review.user.username, user_path(review.user) %></small>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p> No reviews yet. </p>
+    <% end %>
+  </div>
+</div>
