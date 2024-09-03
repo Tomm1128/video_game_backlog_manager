@@ -1,0 +1,46 @@
+<h1>Add video game to collection</h1>
+
+<%= form_with(model: [@user, @collection_video_game], url: user_collection_video_games_path(@user), method: :post, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :collection_type, "Collection Type" %>
+    <%= form.select :collection_type, options_for_select(['Completed', 'In-Progress', 'Wishlist']), { include_blank: "Select collection" }, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :video_game_id, "Select Existing Video Game" %>
+    <%= form.collection_select :video_game_id, @video_games, :id, :name, { include_blank: "Select a Video Game" }, { class: "form-control" } %>
+  </div>
+
+  <h4>OR</h4>
+
+  <div class="form-group">
+    <%= fields_for :video_game, @collection_video_game.build_video_game do |vg_form| %>
+      <%= vg_form.label :name %>
+      <%= vg_form.text_field :name, class: "form-control" %>
+
+      <%= vg_form.label :description %>
+      <%= vg_form.text_area :description, class: "form-control" %>
+
+      <%= vg_form.label :release_date %>
+      <%= vg_form.text_field :release_date, class: "form-control" %>
+
+      <%= vg_form.label :developer %>
+      <%= vg_form.text_field :developer, class: "form-control" %>
+
+      <%= vg_form.label :publisher %>
+      <%= vg_form.text_field :publisher, class: "form-control" %>
+
+      <%= vg_form.label :platform %>
+      <%= vg_form.text_field :platform, class: "form-control" %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :playtime %>
+    <%= form.text_field :playtime, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Add to Collection', class: 'btn btn-primary' %>
+  </div>
+<% end %>
