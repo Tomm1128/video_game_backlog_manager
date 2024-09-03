@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @completed_games = @user.collections.where(type: "Completed").video_games
     @completed_games = @user.collection_by_type("Completed")
     @in_progress_games = @user.collection_by_type("In-Progress")
     @wishlist_games = @user.collection_by_type("Wishlist")

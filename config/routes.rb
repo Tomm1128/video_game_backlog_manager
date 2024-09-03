@@ -10,7 +10,10 @@ Rails.application.routes.draw do
 
   root 'video_games#index'
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show] do
+    resources :collection_video_games
+  end
+
   resources :video_games
 
   get 'login', to: 'sessions#new'
