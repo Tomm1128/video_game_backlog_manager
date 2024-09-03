@@ -45,7 +45,7 @@ VideoGameGenre.create!([
                        ])
 
 collections = Collection.create!([
-                                   { user: users[0], collection_type: "Backlog" },
+                                   { user: users[0], collection_type: "In-Progress" },
                                    { user: users[1], collection_type: "Completed" },
                                    { user: users[2], collection_type: "Wishlist" },
                                  ])
