@@ -8,13 +8,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root 'video_games#index'
+  root 'video_games#welcome'
 
   resources :users, only: [:new, :create, :show] do
     resources :collection_video_games
   end
 
-  resources :video_games
+  resources :video_games do
+    resources :reviews, only: [:new, :create]
+  end
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
