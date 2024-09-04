@@ -7,10 +7,15 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "rails-ujs" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% unless controller_name == 'sessions' && (action_name == 'new' || action_name == 'create') || controller_name == 'users' && action_name == 'new' %>
+      <%= render 'layouts/navbar' %>
+    <% end %>
+
     <% flash.each do |key, message| %>
       <div class="flash flash-<%= key %>">
         <%= message %>
