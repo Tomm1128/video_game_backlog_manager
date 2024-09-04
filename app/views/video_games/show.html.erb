@@ -13,6 +13,9 @@
   </div>
   <div class="mt-5">
     <h2>Reviews</h2>
+    <% unless @user.reviewed_video_game?(params[:id]) %>
+      <%= link_to "Add Review", new_video_game_review_path(@video_game), class: "btn btn-primary" %>
+    <% end %>
     <% if @video_game.reviews.any? %>
       <div class="list-group">
         <% @video_game.reviews.each do |review| %>
