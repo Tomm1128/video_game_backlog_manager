@@ -10,14 +10,16 @@
 
           <hr>
 
-          <%= link_to "Add to collections", new_user_collection_video_game_path(@user), class: "btn btn-primary" %>
+          <% if @user.id == session[:user_id]%>
+            <%= link_to "Add to collections", new_user_collection_video_game_path(@user), class: "btn btn-primary" %>
+          <% end%>
 
           <h4 class="mt-4">Completed</h4>
           <ul class="list-group">
             <% if @completed_games %>
               <% @completed_games.each do |video_game| %>
                 <li class="list-group-item">
-                  <%= video_game.name %>
+                  <%= link_to video_game.name, video_game_path(video_game) %>
                 </li>
               <% end %>
             <% end %>
@@ -28,7 +30,7 @@
             <% if @in_progress_games %>
               <% @in_progress_games.each do |video_game| %>
                 <li class="list-group-item">
-                  <%= video_game.name %>
+                  <%= link_to video_game.name, video_game_path(video_game) %>
                 </li>
               <% end %>
             <% end %>
@@ -39,7 +41,7 @@
             <% if @wishlist_games %>
               <% @wishlist_games.each do |video_game| %>
                 <li class="list-group-item">
-                  <%= video_game.name %>
+                  <%= link_to video_game.name, video_game_path(video_game) %>
                 </li>
               <% end %>
             <% end %>
