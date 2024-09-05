@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :bio, presence: true
+  validates :password, presence: true, confirmation: true
+  validates :password_confirmation, presence: true
 
   def collection_by_type(collection_type)
     return unless collections.where(collection_type: collection_type).any?
