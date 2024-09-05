@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <h1 class="text-center mb-4">All Video Games</h1>
-  <div class="list-group">
+  <div class="list-group m-4">
     <% @video_games.each do |video_game| %>
-      <a href="<%= video_game_path(video_game) %>" class="list-group-item list-group-item-action">
+      <a href="<%= video_game_path(video_game) %>" class="list-group-item list-group-item-action p-3">
         <h4 class="mb-1"><%= video_game.name %></h4>
         <% if video_game.reviews.any? %>
           <p class="mb-1">Rating: <%= video_game.average_rating %></p>
