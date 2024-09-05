@@ -9,22 +9,14 @@
 #   end
 
 users = Array.new(10) do
+  password = "password#{rand(1..10)}"
   User.create!(
     username: Faker::Internet.username,
-    password: "password#{rand(1..10)}",
+    password: password,
+    password_confirmation: password,
     bio: Faker::Quote.famous_last_words
   )
 end
-
-genres = Genre.create!([
-                         { name: "RPG" },
-                         { name: "Strategy" },
-                         { name: "Platformer" },
-                         { name: "Puzzle" },
-                         { name: "Action" },
-                         { name: "Adventure" },
-                         { name: "Shooter" },
-                       ])
 
 video_games = Array.new(20) do
   VideoGame.create!(
@@ -37,27 +29,21 @@ video_games = Array.new(20) do
   )
 end
 
-video_games.each do |video_game|
-  VideoGameGenre.create!(
-    video_game: video_game,
-    genre: genres.sample
-  )
-end
-
 users.each do |user|
   %w[In-Progress Completed Wishlist].each do |collection_type|
     collection = Collection.create!(
       user: user,
       collection_type: collection_type
     )
-    num_games = rand(2..3)
-    video_games.sample(num_games).each do |video_game|
+
+    video_games.sample(rand(2..3)).each do |video_game|
       CollectionVideoGame.create!(
         collection: collection,
         video_game: video_game,
         playtime: "#{rand(5..100)} hours"
       )
 
+      # Create a review for the video game
       Review.create!(
         title: Faker::Lorem.sentence(word_count: 3),
         body: Faker::Lorem.paragraph(sentence_count: 3),

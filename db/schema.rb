@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_30_151327) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_05_185459) do
   create_table "collection_video_games", force: :cascade do |t|
     t.integer "collection_id"
     t.integer "video_game_id"
@@ -27,12 +27,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_151327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_collections_on_user_id"
-  end
-
-  create_table "genres", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -53,15 +47,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_151327) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "video_game_genres", force: :cascade do |t|
-    t.integer "video_game_id"
-    t.integer "genre_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["genre_id"], name: "index_video_game_genres_on_genre_id"
-    t.index ["video_game_id"], name: "index_video_game_genres_on_video_game_id"
   end
 
   create_table "video_games", force: :cascade do |t|
