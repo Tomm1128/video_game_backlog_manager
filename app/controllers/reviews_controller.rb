@@ -16,6 +16,21 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    @review.update(review_params)
+
+    if @review.save
+      redirect_to @video_game, notice: "Review was updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
 private
 
   def set_video_game
