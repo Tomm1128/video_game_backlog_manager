@@ -9,4 +9,11 @@ class VideoGame < ApplicationRecord
     average = Review.where(video_game_id: id).average(:rating)
     average.nil? ? 0 : average.round(2)
   end
+
+  scope :top_rated, -> {
+    joins(:reviews)
+      .select("video_games.*, AVG(reviews.rating) AS average_rating")
+      .group("video_games.id")
+      .order("average_rating DESC")
+  }
 end

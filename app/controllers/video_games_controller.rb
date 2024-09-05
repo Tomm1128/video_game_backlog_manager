@@ -2,11 +2,11 @@ class VideoGamesController < ApplicationController
   before_action :authenticate_user
 
   def welcome
-    @top_rated_video_games = VideoGame.all.sort_by(&:average_rating).reverse.first(3)
+    @top_rated_video_games = VideoGame.top_rated.limit(3)
   end
 
   def index
-    @video_games = VideoGame.all.sort_by(&:average_rating).reverse
+    @video_games = VideoGame.top_rated
   end
 
   def show
