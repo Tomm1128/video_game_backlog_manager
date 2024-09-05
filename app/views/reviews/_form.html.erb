@@ -1,0 +1,20 @@
+<%= form_with(model: [@video_game, @review], local: true, class: "p-4 border rounded shadow-sm") do |form| %>
+  <div class="form-group mb-3">
+    <%= form.label :title, "Review Title", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter your review title", value: @review.title %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :body, "Review Body", class: "form-label" %>
+    <%= form.text_area :body, class: "form-control", placeholder: "Write your review here", rows: 5, value: @review.body %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.label :rating, "Rating", class: "form-label" %>
+    <%= form.number_field :rating, class: "form-control", step: 0.1, min: 0, max: 5, placeholder: "Rate from 0 to 5", value: @review.rating %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= form.submit "Submit Review", class: "btn btn-primary w-100" %>
+  </div>
+<% end %>
