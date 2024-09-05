@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    username { "Tuj" }
-    password { "password" }
-    password_confirmation { "password" }
-    bio { "This is a bio" }
+    sequence(:username) { |n| "user#{n}" }
+    password { 'password123' }
+    password_confirmation { 'password123' }
+    bio { Faker::Quote.famous_last_words }
   end
 end
