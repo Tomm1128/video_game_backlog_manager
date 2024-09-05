@@ -1,4 +1,15 @@
 <%= form_with(model: [@video_game, @review], local: true, class: "p-4 border rounded shadow-sm") do |form| %>
+<% if @review.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h4>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-group mb-3">
     <%= form.label :title, "Review Title", class: "form-label" %>
     <%= form.text_field :title, class: "form-control", placeholder: "Enter your review title", value: @review.title %>
