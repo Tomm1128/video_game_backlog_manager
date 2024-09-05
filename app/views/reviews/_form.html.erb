@@ -1,4 +1,6 @@
 <%= form_with(model: [@video_game, @review], local: true, class: "p-4 border rounded shadow-sm") do |form| %>
+  <%= render 'layouts/form_errors', model: @review %>
+
   <div class="form-group mb-3">
     <%= form.label :title, "Review Title", class: "form-label" %>
     <%= form.text_field :title, class: "form-control", placeholder: "Enter your review title", value: @review.title %>

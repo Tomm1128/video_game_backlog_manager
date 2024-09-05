@@ -1,46 +1,61 @@
-<h1>Add video game to collection</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">Add Video Game to Collection</h1>
 
-<%= form_with(model: [@user, @collection_video_game], url: user_collection_video_games_path(@user), method: :post, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :collection_type, "Collection Type" %>
-    <%= form.select :collection_type, options_for_select(['Completed', 'In-Progress', 'Wishlist']), { include_blank: "Select collection" }, class: "form-control" %>
-  </div>
+  <%= form_with(model: [@user, @collection_video_game], url: user_collection_video_games_path(@user), method: :post, local: true, data: { turbo: false }, class: "p-4 border rounded shadow-sm") do |form| %>
+    <%= render 'layouts/form_errors', model: @collection_video_game %>
+    <div class="form-group mb-3">
+      <%= form.label :collection_type, "Collection Type", class: "form-label" %>
+      <%= form.select :collection_type, options_for_select(['Completed', 'In-Progress', 'Wishlist']), { include_blank: "Select collection" }, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :video_game_id, "Select Existing Video Game" %>
-    <%= form.collection_select :video_game_id, @video_games, :id, :name, { include_blank: "Select a Video Game" }, { class: "form-control" } %>
-  </div>
+    <div class="form-group mb-3">
+      <%= form.label :playtime, class: "form-label" %>
+      <%= form.text_field :playtime, class: "form-control" %>
+    </div>
 
-  <h4>OR</h4>
+    <div class="form-group mb-3">
+      <%= form.label :video_game_id, "Select Existing Video Game", class: "form-label" %>
+      <%= form.collection_select :video_game_id, @video_games, :id, :name, { include_blank: "Select a Video Game" }, { class: "form-control" } %>
+    </div>
 
-  <div class="form-group">
-    <%= fields_for :video_game, @collection_video_game.build_video_game do |vg_form| %>
-      <%= vg_form.label :name %>
-      <%= vg_form.text_field :name, class: "form-control" %>
+    <h4 class="mt-4 mb-3">Or Add a New Video Game</h4>
 
-      <%= vg_form.label :description %>
-      <%= vg_form.text_area :description, class: "form-control" %>
+    <div class="border p-3 rounded bg-light mb-4">
+      <%= fields_for :video_game, @collection_video_game.build_video_game do |vg_form| %>
+        <div class="form-group mb-3">
+          <%= vg_form.label :name, class: "form-label" %>
+          <%= vg_form.text_field :name, class: "form-control" %>
+        </div>
 
-      <%= vg_form.label :release_date %>
-      <%= vg_form.text_field :release_date, class: "form-control" %>
+        <div class="form-group mb-3">
+          <%= vg_form.label :description, class: "form-label" %>
+          <%= vg_form.text_area :description, class: "form-control" %>
+        </div>
 
-      <%= vg_form.label :developer %>
-      <%= vg_form.text_field :developer, class: "form-control" %>
+        <div class="form-group mb-3">
+          <%= vg_form.label :release_date, class: "form-label" %>
+          <%= vg_form.text_field :release_date, class: "form-control" %>
+        </div>
 
-      <%= vg_form.label :publisher %>
-      <%= vg_form.text_field :publisher, class: "form-control" %>
+        <div class="form-group mb-3">
+          <%= vg_form.label :developer, class: "form-label" %>
+          <%= vg_form.text_field :developer, class: "form-control" %>
+        </div>
 
-      <%= vg_form.label :platform %>
-      <%= vg_form.text_field :platform, class: "form-control" %>
-    <% end %>
-  </div>
+        <div class="form-group mb-3">
+          <%= vg_form.label :publisher, class: "form-label" %>
+          <%= vg_form.text_field :publisher, class: "form-control" %>
+        </div>
 
-  <div class="form-group">
-    <%= form.label :playtime %>
-    <%= form.text_field :playtime, class: "form-control" %>
-  </div>
+        <div class="form-group mb-3">
+          <%= vg_form.label :platform, class: "form-label" %>
+          <%= vg_form.text_field :platform, class: "form-control" %>
+        </div>
+      <% end %>
+    </div>
 
-  <div class="form-group">
-    <%= form.submit 'Add to Collection', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= form.submit 'Add to Collection', class: 'btn btn-primary w-100' %>
+    </div>
+  <% end %>
+</div>

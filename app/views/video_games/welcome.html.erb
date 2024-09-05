@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <header class="text-center">
+    <h1 class="display-4">Welcome to the Video Game Archive</h1>
+    <p class="lead">The ultimate app to manage your video game backlog</p>
+  </header>
+
+  <section class="my-5">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h2 class="text-center">What We Do</h2>
+        <p class="text-center">Our app helps you organize and track all the games you own. Add games to your backlog, mark them as completed, track your playtime, review them, and more! With the Video Game Archive, your gaming progress is always in check.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-5">
+    <h2 class="text-center">Top Rated Games</h2>
+    <div class="row">
+      <% @top_rated_video_games.each do |game| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= game.name %></h5>
+              <p class="card-text">Average Rating: <strong><%= game.average_rating %></strong></p>
+              <%= link_to 'View Game', video_game_path(game), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
