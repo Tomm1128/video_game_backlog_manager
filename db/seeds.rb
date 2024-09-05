@@ -8,12 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-users = User.create!([
-                       { username: "gamer123", password: "password1", bio: "I love RPGs and strategy games." },
-                       { username: "player_two", password: "password2",
-                         bio: "Platformers and puzzle games are my jam." },
-                       { username: "high_score", password: "password3", bio: "Chasing high scores in every game!" },
-                     ])
+users = Array.new(10) do
+  User.create!(
+    username: Faker::Internet.username,
+    password: "password#{rand(1..10)}",
+    bio: Faker::Quote.famous_last_words
+  )
+end
 
 genres = Genre.create!([
                          { name: "RPG" },
@@ -21,46 +22,49 @@ genres = Genre.create!([
                          { name: "Platformer" },
                          { name: "Puzzle" },
                          { name: "Action" },
+                         { name: "Adventure" },
+                         { name: "Shooter" },
                        ])
 
-video_games = VideoGame.create!([
-                                  { name: "The Elder Scrolls V: Skyrim",
-                                    description: "An open-world RPG set in the land of Skyrim.",
-                                    release_date: "2011-11-11", developer: "Bethesda Game Studios",
-                                    publisher: "Bethesda Softworks", platform: "PC, PS3, Xbox 360" },
-                                  { name: "Super Mario Odyssey",
-                                    description: "A 3D platformer featuring Mario exploring various kingdoms.",
-                                    release_date: "2017-10-27", developer: "Nintendo", publisher: "Nintendo",
-                                    platform: "Nintendo Switch" },
-                                  { name: "Starcraft II",
-                                    description: "A real-time strategy game set in a sci-fi universe.",
-                                    release_date: "2010-07-27", developer: "Blizzard Entertainment",
-                                    publisher: "Blizzard Entertainment", platform: "PC" },
-                                ])
+video_games = Array.new(20) do
+  VideoGame.create!(
+    name: Faker::Game.title,
+    description: Faker::Lorem.sentence(word_count: 15),
+    release_date: Faker::Date.between(from: "2000-01-01", to: "2024-01-01"),
+    developer: Faker::Company.name,
+    publisher: Faker::Company.name,
+    platform: Faker::Game.platform
+  )
+end
 
-VideoGameGenre.create!([
-                         { video_game: video_games[0], genre: genres[0] },
-                         { video_game: video_games[1], genre: genres[2] },
-                         { video_game: video_games[2], genre: genres[1] },
-                       ])
+video_games.each do |video_game|
+  VideoGameGenre.create!(
+    video_game: video_game,
+    genre: genres.sample
+  )
+end
 
-collections = Collection.create!([
-                                   { user: users[0], collection_type: "In-Progress" },
-                                   { user: users[1], collection_type: "Completed" },
-                                   { user: users[2], collection_type: "Wishlist" },
-                                 ])
+users.each do |user|
+  %w[In-Progress Completed Wishlist].each do |collection_type|
+    collection = Collection.create!(
+      user: user,
+      collection_type: collection_type
+    )
+    num_games = rand(2..3)
+    video_games.sample(num_games).each do |video_game|
+      CollectionVideoGame.create!(
+        collection: collection,
+        video_game: video_game,
+        playtime: "#{rand(5..100)} hours"
+      )
 
-CollectionVideoGame.create!([
-                              { collection: collections[0], video_game: video_games[0], playtime: "50 hours" },
-                              { collection: collections[1], video_game: video_games[1], playtime: "20 hours" },
-                              { collection: collections[2], video_game: video_games[2], playtime: "10 hours" },
-                            ])
-
-Review.create!([
-                 { title: "Amazing RPG!", body: "Skyrim is one of the best RPGs ever made.", rating: 5, user: users[0],
-                   video_game: video_games[0] },
-                 { title: "Best platformer", body: "Super Mario Odyssey is a masterpiece of platforming design.",
-                   rating: 5, user: users[1], video_game: video_games[1] },
-                 { title: "Intense strategy", body: "Starcraft II offers deep and rewarding strategic gameplay.",
-                   rating: 4, user: users[2], video_game: video_games[2] },
-               ])
+      Review.create!(
+        title: Faker::Lorem.sentence(word_count: 3),
+        body: Faker::Lorem.paragraph(sentence_count: 3),
+        rating: rand(1..5),
+        user: user,
+        video_game: video_game
+      )
+    end
+  end
+end
