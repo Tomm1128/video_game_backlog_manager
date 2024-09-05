@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "User login", type: :feature do
-  # let!(:user) { User.create!(username: 'testuser', password: 'password123', password_confirmation: 'password123', bio: 'A gamer.') }
-
   scenario 'with valid credentials' do
     user = create(:user)
 
