@@ -41,7 +41,6 @@ On page load, Video Game Archive will show you a login screen. You can use one o
 
 - Add a reviews to video games
 - Edit your reviews
-- Delete your reviews
 - View Profile page, display username and video games in collection
   - Add games to each of the three collections you can have Wishlist, In-Progress, and Completed.
 - View all the games in the app that have been reviewed.
