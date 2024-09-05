@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :video_games do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new, :create, :edit, :update]
   end
 
   get 'login', to: 'sessions#new'
