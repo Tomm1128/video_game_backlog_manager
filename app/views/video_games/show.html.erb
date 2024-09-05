@@ -23,6 +23,9 @@
             <h4 class="mb-1"><%= review.title %></h4>
             <p class="mb-1"><%= review.body %></p>
             <small class="text-muted">Rating: <%= review.rating %> | Reviewed by <%= link_to review.user.username, user_path(review.user) %></small>
+            <% if @user.id == review.user.id %>
+              <%= link_to "Edit Review", edit_video_game_review_path(@video_game, review), class: "btn btn-primary" %>
+            <% end %>
           </div>
         <% end %>
       </div>
