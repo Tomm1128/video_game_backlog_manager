@@ -1,21 +1,20 @@
 require 'rails_helper'
 
 RSpec.feature "User login", type: :feature do
-  scenario 'with valid credentials' do
-    user = create(:user)
+  let(:user) { create(:user) }
 
+  scenario 'with valid credentials' do
     visit login_path
 
     fill_in 'Username', with: user.username
-    fill_in 'Password', with: 'password'
+    fill_in 'Password', with: 'password123'
     click_button 'Log in'
 
     expect(page).to have_current_path(root_path)
+    expect(page).to have_content("Welcome to the Video Game Archive")
   end
 
   scenario 'with invalid credentials' do
-    user = create(:user)
-
     visit login_path
 
     fill_in 'Username', with: user.username
