@@ -10,15 +10,17 @@ class CollectionVideoGamesController < ApplicationController
 
   def create
     @video_game = find_or_create_video_game
-    return render :new unless @video_game
 
     @collection = Collection.find_or_create_by(user_id: @user.id,
                                                collection_type: collection_video_game_params[:collection_type])
-
-    @collection.collection_video_games.create!(video_game: @video_game,
-                                               playtime: collection_video_game_params[:playtime])
-
-    redirect_to user_path(@user), notice: "Video game added to collection."
+    @collection_video_game = @collection.collection_video_games.build(video_game: @video_game,
+                                                                      playtime: collection_video_game_params[:playtime])
+    if @collection_video_game.save
+      redirect_to user_path(@user), notice: "Video game added to collection."
+    else
+      @video_games = VideoGame.all
+      render :new
+    end
   end
 
 private
