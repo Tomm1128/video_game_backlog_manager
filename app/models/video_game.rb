@@ -6,6 +6,7 @@ class VideoGame < ApplicationRecord
   has_many :collections, through: :collection_video_games
 
   def average_rating
-    Review.where(video_game_id: id).average(:rating)
+    average = Review.where(video_game_id: id).average(:rating)
+    average.nil? ? 0 : average.round(2)
   end
 end
