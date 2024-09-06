@@ -15,7 +15,7 @@ RSpec.describe CollectionVideoGame, type: :model do
 
   describe "validations" do
     it "is valid with a collection_id, video_game_id, and playtime" do
-      collection_video_game = create(:collection_video_game) # Ensure the associations are created
+      collection_video_game = create(:collection_video_game)
       expect(collection_video_game).to be_valid
     end
 
