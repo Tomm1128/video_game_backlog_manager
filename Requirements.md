@@ -52,16 +52,20 @@
     - Encapsulate logic present in controllers as methods in models.
     - Use helper methods and partials in views to minimize logic.
     - Follow patterns in the Rails Style Guide and the Ruby Style Guide.
+    - [X] I made a conscious effort to be dry when I can.
 
 11. **Linting:**
     - Your application should conform to Nitro's Ruby linting conventions.
     - Copy the `.rubocop.yml` from the provided repo to your application.
     - Running `rubocop` from your application's root should return a "no offenses detected" message.
     - Add `rubocop` and `rubocop-performance` to your Gemfile.
+    - [X] Ran rubocop to make sure I am following the standards. Made sure to correct any rubocop offenses. 
 
 12. **README.md:**
     - Include a `README.md` with a description of the project and an installation guide (e.g., fork and clone repo, migrate db, bundle install, etc).
+    - [X] Created the readme and verified that the steps are correct to setup the app. 
 
 13. **No Scaffolding:**
     - Do not use scaffolding to build your project.
     - The goal is to learn, and scaffolding is designed to get up and running quickly but does not offer the same learning experience.
+    - [X] I used no scaffolding 
