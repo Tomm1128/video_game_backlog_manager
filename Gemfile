@@ -11,6 +11,8 @@ gem "bootstrap", "~> 5.3.0"
 
 gem "sassc-rails"
 
+gem "view_component"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
