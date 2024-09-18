@@ -17,11 +17,12 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find_by(id: params[:id])
+    redirect_to(video_game_path(@video_game)) if @review.blank?
   end
 
   def update
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find_by(id: params[:id])
     @review.update(review_params)
 
     if @review.save
